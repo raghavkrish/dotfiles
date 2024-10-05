@@ -133,9 +133,10 @@ eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
 
 # fzf opts and searching
-export FZF_DEFAULT_OPTS=" --tmux --reverse --preview 'bat -n --color=always {}'"
-export FZF_CTRL_T_OPTS="--tmux --reverse --height=100% --preview 'bat -n --color=always --line-range :1000 {}'"
-export FZF_ALT_C_OPTS="--tmux --reverse --preview 'eza --tree --color=always {} | head -200'"
+export FZF_DEFAULT_OPTS=" --tmux --reverse --preview 'bat -n --color=always {} --style=numbers'"
+export FZF_CTRL_T_OPTS="--height=100%"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+export FZF_COMPLETION_OPTS='--border --info=inline'
 alias fs='fd --type f --exclude .git | fzf-tmux -p --reverse | xargs subl'
 alias fsh='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs subl'
 alias fn='fd --type f --exclude .git | fzf-tmux -p --reverse | xargs nvim'
@@ -178,6 +179,7 @@ alias dsize='du -hsc'
 alias cl='clear'
 alias hide='chflags hidden'
 alias unhide='chflags nohidden'
+alias asitop='sudo asitop'
 
 # zellij aliases
 alias z='zellij'
