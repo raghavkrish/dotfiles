@@ -81,7 +81,7 @@ zstyle ':omz:plugins:eza' 'icons' yes
 zstyle ':omz:plugins:eza' 'dirs-first' yes
 zstyle ':omz:plugins:eza' 'header' yes
 zstyle ':omz:plugins:eza' 'git-status' no
-plugins=(git httpie jsontools macos zsh-autosuggestions zsh-syntax-highlighting sublime you-should-use chucknorris)
+plugins=(git httpie jsontools macos zsh-autosuggestions zsh-syntax-highlighting sublime you-should-use chucknorris sudo)
 
 # Load brew completions
 
@@ -135,7 +135,7 @@ eval "$(zoxide init --cmd cd zsh)"
 # fzf opts and searching
 export FZF_DEFAULT_OPTS=" --tmux --reverse --preview 'bat -n --color=always {} --style=numbers'"
 export FZF_CTRL_T_OPTS="--height=100%"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+export FZF_ALT_C_OPTS="--preview 'eza -al --group-directories-first --color=always --icons=always {}'"
 export FZF_COMPLETION_OPTS='--border --info=inline'
 alias fs='fd --type f --exclude .git | fzf-tmux -p --reverse | xargs subl'
 alias fsh='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs subl'
@@ -150,11 +150,11 @@ alias cat='bat'
 EZA_DEFAULT_OPTIONS="--color=always --icons=always"
 alias ls="eza ${EZA_DEFAULT_OPTIONS}"
 alias lf="eza ${EZA_DEFAULT_OPTIONS} -f"
-alias lff="eza ${EZA_DEFAULT_OPTIONS} -laf"
+alias lff="eza ${EZA_DEFAULT_OPTIONS} -af"
 alias ld="eza ${EZA_DEFAULT_OPTIONS} -D"
-alias ldd="eza ${EZA_DEFAULT_OPTIONS} -laD"
-alias le="eza ${EZA_DEFAULT_OPTIONS} -al"
-alias lst="eza ${EZA_DEFAULT_OPTIONS} --tree"
+alias ldd="eza ${EZA_DEFAULT_OPTIONS} -aD"
+alias le="eza -al"
+alias lst="eza ${EZA_DEFAULT_OPTIONS} --tree --group-directories-first"
 
 # brew aliases
 alias bi="brew install"
@@ -192,13 +192,19 @@ alias zd='zellij d'
 alias zda='zellij da'
 
 # functions
-recursive_delete_files() {
+rdf() {
   if [ $# -lt 2 ]
   then
     echo "Usage: $funcstack[1] <dir> <filename>"
     return
   fi
-  eval $(find $1 -name $2 -delete)
+  find $1 -name $2
+  find $1 -name $2 -delete
+}
+
+cdn() {
+  mkdir -p $1
+  cd $1
 }
 
 # load nvm
