@@ -127,6 +127,24 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# custom env vars
+export FD_EXCLUDE_DIRS="(.git|node_modules)"
+EZA_DEFAULT_OPTIONS="--color=always --icons=always"
+
+# eza aliases
+alias ls="eza ${EZA_DEFAULT_OPTIONS}"
+alias lf="eza ${EZA_DEFAULT_OPTIONS} -f"
+alias lff="eza ${EZA_DEFAULT_OPTIONS} -af"
+alias ld="eza ${EZA_DEFAULT_OPTIONS} -D"
+alias ldd="eza ${EZA_DEFAULT_OPTIONS} -aD"
+alias le="eza -al"
+alias lst="eza ${EZA_DEFAULT_OPTIONS} --tree --group-directories-first"
+
+# zoxide config
+export _ZO_ECHO=1
+export _ZO_RESOLVE_SYMLINKS=1
+export _ZO_FZF_OPTS="--info=inline --select-1 --exit-0 --height=50% --layout=reverse --keep-right --preview-window=right --preview='\command eza -1 ${EZA_DEFAULT_OPTIONS} --all --group-directories-first {2..}'"
+
 # source packages
 source <(fzf --zsh)
 eval $(thefuck --alias)
@@ -135,26 +153,16 @@ eval "$(zoxide init --cmd cd zsh)"
 # fzf opts and searching
 export FZF_DEFAULT_OPTS=" --tmux --reverse --preview 'bat -n --color=always {} --style=numbers'"
 export FZF_CTRL_T_OPTS="--height=100%"
-export FZF_ALT_C_OPTS="--preview 'eza -al --group-directories-first --color=always --icons=always {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --all --group-directories-first {2..} --color=always --icons=always {}'"
 export FZF_COMPLETION_OPTS='--border --info=inline'
-alias fs='fd --type f --exclude .git | fzf-tmux -p --reverse | xargs subl'
-alias fsh='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs subl'
-alias fn='fd --type f --exclude .git | fzf-tmux -p --reverse | xargs nvim'
-alias fnh='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
+alias fs="fd --type f --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs subl"
+alias fsh="fd --type f --hidden --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs subl"
+alias fn="fd --type f --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs nvim"
+alias fnh="fd --type f --hidden --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs nvim"
 
 # bat config
 export BAT_THEME=Dracula
 alias cat='bat'
-
-# eza aliases
-EZA_DEFAULT_OPTIONS="--color=always --icons=always"
-alias ls="eza ${EZA_DEFAULT_OPTIONS}"
-alias lf="eza ${EZA_DEFAULT_OPTIONS} -f"
-alias lff="eza ${EZA_DEFAULT_OPTIONS} -af"
-alias ld="eza ${EZA_DEFAULT_OPTIONS} -D"
-alias ldd="eza ${EZA_DEFAULT_OPTIONS} -aD"
-alias le="eza -al"
-alias lst="eza ${EZA_DEFAULT_OPTIONS} --tree --group-directories-first"
 
 # brew aliases
 alias bi="brew install"
