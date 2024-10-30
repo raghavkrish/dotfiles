@@ -155,10 +155,10 @@ export FZF_DEFAULT_OPTS=" --tmux --reverse --preview 'bat -n --color=always {} -
 export FZF_CTRL_T_OPTS="--height=100%"
 export FZF_ALT_C_OPTS="--preview 'eza --all --group-directories-first {2..} --color=always --icons=always {}'"
 export FZF_COMPLETION_OPTS='--border --info=inline'
-alias fs="fd --type f --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs subl"
-alias fsh="fd --type f --hidden --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs subl"
-alias fn="fd --type f --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs nvim"
-alias fnh="fd --type f --hidden --exclude ${FD_EXCLUDE_DIRS} | fzf-tmux -p --reverse | xargs nvim"
+alias fs="fd --type f | fzf-tmux -p --reverse | xargs subl"
+alias fsh="fd --type f --hidden | fzf-tmux -p --reverse | xargs subl"
+alias fn="fd --type f | fzf-tmux -p --reverse | xargs nvim"
+alias fnh="fd --type f --hidden | fzf-tmux -p --reverse | xargs nvim"
 
 # bat config
 export BAT_THEME=Dracula
@@ -173,6 +173,8 @@ alias bl="brew list"
 alias bcu="brew cleanup"
 alias bu="brew update"
 alias bubc="brew update && brew upgrade & brew cleanup"
+alias bsstart='brew services start'
+alias bsstop='brew services stop'
 
 # load curl to path
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
@@ -187,7 +189,10 @@ alias dsize='du -hsc'
 alias cl='clear'
 alias hide='chflags hidden'
 alias unhide='chflags nohidden'
-alias asitop='sudo asitop'
+alias asitop='/Users/raghav/misc/custom-commands/asitop'
+alias scheduler='/Users/raghav/misc/custom-commands/scheduler'
+alias zshconf='subl /Users/raghav/code/dotfiles/.zshrc'
+alias zshconfig='vi /Users/raghav/code/dotfiles/.zshrc'
 
 # zellij aliases
 alias z='zellij'
