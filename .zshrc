@@ -203,6 +203,9 @@ alias zk='zellij k'
 alias zka='zellij ka'
 alias zd='zellij d'
 alias zda='zellij da'
+alias zc="zellij --layout compact"
+alias zrf="zellij run --floating -- "
+alias zrb="zellij run -c -- "
 
 # functions
 rdf() {
@@ -231,3 +234,4 @@ source /Users/raghav/.rvm/scripts/rvm
 
 # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # chuck_cow
+eval "$(atuin init zsh)"
