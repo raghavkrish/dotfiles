@@ -191,19 +191,19 @@ alias hide='chflags hidden'
 alias unhide='chflags nohidden'
 alias asitop='/Users/raghav/misc/custom-commands/asitop'
 alias scheduler='/Users/raghav/misc/custom-commands/scheduler'
-alias zshconf='subl /Users/raghav/code/dotfiles/.zshrc'
-alias zshconfig='vi /Users/raghav/code/dotfiles/.zshrc'
+alias zshconf='subl ~/dotfiles/.zshrc'
+alias zshconfig='vi ~/dotfiles/.zshrc'
 
 # zellij aliases
-alias z='zellij'
-alias zs='zellij -s'
-alias zls='zellij ls'
-alias za='zellij a'
-alias zk='zellij k'
-alias zka='zellij ka'
-alias zd='zellij d'
-alias zda='zellij da'
+alias z="zellij"
 alias zc="zellij --layout compact"
+alias zs="zellij -s"
+alias zls="zellij ls"
+alias za="zellij a"
+alias zk="zellij k"
+alias zka="zellij ka"
+alias zd="zellij d"
+alias zda="zellij da"
 alias zrf="zellij run --floating -- "
 alias zrb="zellij run -c -- "
 
@@ -235,3 +235,7 @@ source /Users/raghav/.rvm/scripts/rvm
 # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # chuck_cow
 eval "$(atuin init zsh)"
+
+# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# source <(carapace _carapace)
