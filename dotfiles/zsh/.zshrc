@@ -207,6 +207,17 @@ alias zda="zellij da"
 alias zrf="zellij run --floating -- "
 alias zrb="zellij run -c -- "
 
+# Docker aliases
+alias di="docker images -a"
+alias dca="docker ps -a -q"
+alias dcr='docker ps'
+alias drc='docker rm'
+alias dri='docker rmi'
+alias drac="docker rm $(docker ps -a -q)"
+alias drai="docker rmi $(docker images -a -q)"
+alias dstop="docker stop"
+alias dstart='docker start'
+
 # functions
 rdf() {
   if [ $# -lt 2 ]
@@ -223,6 +234,10 @@ cdn() {
   cd $1
 }
 
+copy() {
+  cat $1 | pbcopy
+}
+
 # load nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -235,6 +250,8 @@ source /Users/raghav/.rvm/scripts/rvm
 # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # chuck_cow
 eval "$(atuin init zsh)"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+. ~/.asdf/plugins/golang/set-env.zsh
 
 # export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
