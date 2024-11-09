@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 brew update
 xargs brew install < formulae
 xargs brew install --cask < casks

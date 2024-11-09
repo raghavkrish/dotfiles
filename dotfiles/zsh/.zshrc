@@ -132,6 +132,11 @@ source $ZSH/oh-my-zsh.sh
 export FD_EXCLUDE_DIRS="(.git|node_modules)"
 EZA_DEFAULT_OPTIONS="--color=always --icons=always"
 
+# Load eza Dracula theme
+if [ -f "$HOME/.config/eza/dracula.sh" ]; then
+    source "$HOME/.config/eza/dracula.sh"
+fi
+
 # eza aliases
 alias ls="eza ${EZA_DEFAULT_OPTIONS}"
 alias lf="eza ${EZA_DEFAULT_OPTIONS} -f"
@@ -195,6 +200,7 @@ alias scheduler='/Users/raghav/misc/custom-commands/scheduler'
 alias zshconf='subl ~/dotfiles/.zshrc'
 alias zshconfig='vi ~/dotfiles/.zshrc'
 alias free='btop'
+alias y='yazi'
 
 # zellij aliases
 alias z="zellij"
