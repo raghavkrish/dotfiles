@@ -37,6 +37,8 @@ run_copy() {
 
 # Print usage instructions
 print_usage(){
+  echo "\nSYSTEM_PATH set to $SYSTEM_PATH"
+  echo "REPO_PATH set to $REPO_PATH\n"
   echo "\nUsage: $BASECMD [str|rts]"
   echo "str  - Copy files from SYSTEM_PATH to REPO_PATH"
   echo "rts  - Copy files from REPO_PATH to SYSTEM_PATH"

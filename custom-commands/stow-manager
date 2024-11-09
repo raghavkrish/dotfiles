@@ -7,6 +7,7 @@ SYSTEM_PATH="${HOME}/dotfiles/"
 
 # Function to print usage
 print_usage() {
+  echo "\nSYSTEM_PATH set to $SYSTEM_PATH\n"
   echo "Usage: $BASECMD [stow|unstow]"
   echo "  stow   - Create symlinks for all directories"
   echo "  unstow - Remove symlinks for all directories"
