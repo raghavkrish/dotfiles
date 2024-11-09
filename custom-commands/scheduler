@@ -1,34 +1,43 @@
 #!/usr/bin/env zsh
 
+# Get the base command name from the script path
 BASECMD=`basename $0`
 
+# Store number of arguments and main command
 NO_OF_ARGS=$#
 MAIN_COMMAND=$1
 
+# Source password handler utility
 source /Users/raghav/misc/custom-commands/passwd_handler
 
+# List current power schedule
 list() {
   pmset -g sched
   exit 0
 }
 
+# Schedule a new power action
 schedule() {
   echo "Enter the power action: (sleep|restart|wake)"
   read action
   echo "Enter the days pattern: (default: everyday - MTWRFSU)"
   read pattern
+  # Set default pattern to run everyday if none provided
   pattern=${pattern:-MTWRFSU}
   echo "Enter time in HH:MM:SS (24 hour format)"
   read time
+  # Get sudo password and schedule the power action
   mypassword=$(read_password)
   echo $mypassword | sudo -S pmset repeat $action $pattern $time
 }
 
+# Remove existing power schedule
 remove() {
   mypassword=$(read_password)
   echo $mypassword | sudo -S pmset repeat cancel
 }
 
+# Print usage instructions
 print_usage() {
   echo "\nUsage: $BASECMD subcommand\n"
   echo "Subcommand     Alias                        Help"
@@ -39,6 +48,7 @@ print_usage() {
   exit 1
 }
 
+# Validate command line arguments
 validate() {
   if [[ $NO_OF_ARGS -ne 1 ]]
   then
@@ -47,6 +57,7 @@ validate() {
   fi
 }
 
+# Main function to handle command routing
 main() {
   validate
   case $MAIN_COMMAND in
@@ -60,4 +71,5 @@ main() {
   esac
 }
 
+# Execute main function
 main

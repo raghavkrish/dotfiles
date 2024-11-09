@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
+
+# Source the password handler script that contains read_password function
 source /Users/raghav/misc/custom-commands/passwd_handler
 
+# Get password from the password handler
 mypassword=$(read_password)
+
+# Use the password to run asitop with sudo privileges
+# The -S flag tells sudo to read the password from stdin
 echo $mypassword | sudo -S asitop

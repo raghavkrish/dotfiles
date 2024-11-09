@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
 
+BASECMD=`basename $0`
 NO_OF_ARGS=$#
 
 SYSTEM_PATH="${HOME}/dotfiles/"
 
 # Function to print usage
 print_usage() {
-  echo "Usage: $0 [stow|unstow]"
+  echo "Usage: $BASECMD [stow|unstow]"
   echo "  stow   - Create symlinks for all directories"
   echo "  unstow - Remove symlinks for all directories"
   exit 1

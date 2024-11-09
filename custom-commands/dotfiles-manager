@@ -1,14 +1,19 @@
 #!/usr/bin/env zsh
+# Exit immediately if a command exits with a non-zero status
 set -e
 
+# Get the base name of the script
 BASECMD=`basename $0`
 
+# Store number of arguments and main command
 NO_OF_ARGS=$#
 MAIN_COMMAND=$1
 
+# Define paths for repository and system dotfiles
 REPO_PATH="${HOME}/code/dev-setup/dotfiles/"
 SYSTEM_PATH="${HOME}/dotfiles/"
 
+# Validate that a directory exists
 validate_dir(){
   if [[ ! -d "$1" ]]; then
   echo "Error: Directory '$1' does not exist"
@@ -16,6 +21,7 @@ validate_dir(){
 fi
 }
 
+# Validate that exactly one argument is provided
 validate_args() {
   if [[ $NO_OF_ARGS -ne 1 ]]
   then
@@ -24,29 +30,32 @@ validate_args() {
   fi
 }
 
+# Copy files using rsync, excluding .git directory
 run_copy() {
   rsync -av --progress --exclude '.git' "$1" "$2"
 }
 
+# Print usage instructions
 print_usage(){
-  echo "\nUsage: $BASECMD subcommand\n"
-  echo "Subcommand     Alias                        Help"
-  echo "str              s              - Copy files from SYSTEM_PATH to REPO_PATH"
-  echo "rts              r              - Copy files from REPO_PATH to SYSTEM_PATH"
+  echo "\nUsage: $BASECMD [str|rts]"
+  echo "str  - Copy files from SYSTEM_PATH to REPO_PATH"
+  echo "rts  - Copy files from REPO_PATH to SYSTEM_PATH"
   echo ""
   exit 1
 }
 
+# Main function to handle command routing
 main() {
   case $MAIN_COMMAND in
-    str|s)        run_copy $SYSTEM_PATH $REPO_PATH
+    str)        run_copy $SYSTEM_PATH $REPO_PATH
                   ;;
-    rts|r)        run_copy $REPO_PATH $SYSTEM_PATH
+    rts)        run_copy $REPO_PATH $SYSTEM_PATH
                   ;;
     *)            print_usage
   esac
 }
 
+# Validate inputs and execute main function
 validate_args
 validate_dir $REPO_PATH
 validate_dir $SYSTEM_PATH
