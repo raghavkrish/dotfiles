@@ -81,6 +81,7 @@ zstyle ':omz:plugins:eza' 'icons' yes
 zstyle ':omz:plugins:eza' 'dirs-first' yes
 zstyle ':omz:plugins:eza' 'header' yes
 zstyle ':omz:plugins:eza' 'git-status' no
+source .dracula-zsh-syntax
 plugins=(git httpie jsontools macos zsh-autosuggestions zsh-syntax-highlighting sublime you-should-use chucknorris sudo)
 
 # Load brew completions
@@ -151,7 +152,7 @@ eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
 
 # fzf opts and searching
-export FZF_DEFAULT_OPTS=" --tmux --reverse --preview 'bat -n --color=always {} --style=numbers'"
+export FZF_DEFAULT_OPTS="--tmux --reverse --preview 'bat -n --color=always {} --style=numbers'"
 export FZF_CTRL_T_OPTS="--height=100%"
 export FZF_ALT_C_OPTS="--preview 'eza --all --group-directories-first {2..} --color=always --icons=always {}'"
 export FZF_COMPLETION_OPTS='--border --info=inline'
@@ -193,6 +194,7 @@ alias asitop='/Users/raghav/misc/custom-commands/asitop'
 alias scheduler='/Users/raghav/misc/custom-commands/scheduler'
 alias zshconf='subl ~/dotfiles/.zshrc'
 alias zshconfig='vi ~/dotfiles/.zshrc'
+alias free='btop'
 
 # zellij aliases
 alias z="zellij"
@@ -208,7 +210,8 @@ alias zrf="zellij run --floating -- "
 alias zrb="zellij run -c -- "
 
 # Docker aliases
-alias di="docker images -a"
+alias di="docker images"
+alias dia='docker images -a'
 alias dca="docker ps -a -q"
 alias dcr='docker ps'
 alias drc='docker rm'
@@ -217,6 +220,12 @@ alias drac="docker rm $(docker ps -a -q)"
 alias drai="docker rmi $(docker images -a -q)"
 alias dstop="docker stop"
 alias dstart='docker start'
+alias dbl='docker build'
+alias dsp='docker system prune'
+
+dssh() {
+  docker exec -it $1 /bin/bash
+}
 
 # functions
 rdf() {
