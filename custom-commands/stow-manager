@@ -1,0 +1,53 @@
+#!/usr/bin/env zsh
+
+NO_OF_ARGS=$#
+
+SYSTEM_PATH="${HOME}/dotfiles/"
+
+# Function to print usage
+print_usage() {
+  echo "Usage: $0 [stow|unstow]"
+  echo "  stow   - Create symlinks for all directories"
+  echo "  unstow - Remove symlinks for all directories"
+  exit 1
+}
+
+# Check if stow is installed
+if ! command -v stow >/dev/null 2>&1; then
+  echo "Error: GNU stow is not installed"
+  exit 1
+fi
+
+# Check arguments
+if [ $# -ne 1 ]; then
+  print_usage
+fi
+
+action=$1
+valid_actions=("stow" "unstow")
+
+if [[ ! ${valid_actions[(ie)$action]} -le ${#valid_actions} ]]; then
+  print_usage
+fi
+
+# Loop through all directories in the script directory
+for dir in ${SYSTEM_PATH}/*(N/); do
+  dir_name=${dir:t}
+
+  # Skip common directories that shouldn't be stowed
+  if [[ "$dir_name" == ".git" || "$dir_name" == "." || "$dir_name" == ".." ]]; then
+    continue
+  fi
+
+  echo "Processing $dir_name..."
+
+  cd $SYSTEM_PATH
+
+  if [[ "$action" == "stow" ]]; then
+    stow $dir_name
+  else
+    stow -D $dir_name
+  fi
+done
+
+echo "Finished ${action}ing all directories"

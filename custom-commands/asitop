@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+source /Users/raghav/misc/custom-commands/passwd_handler
+
+mypassword=$(read_password)
+echo $mypassword | sudo -S asitop

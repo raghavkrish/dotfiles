@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+BASECMD=`basename $0`
+
+NO_OF_ARGS=$#
+MAIN_COMMAND=$1
+
+source /Users/raghav/misc/custom-commands/passwd_handler
+
+list() {
+  pmset -g sched
+  exit 0
+}
+
+schedule() {
+  echo "Enter the power action: (sleep|restart|wake)"
+  read action
+  echo "Enter the days pattern: (default: everyday - MTWRFSU)"
+  read pattern
+  pattern=${pattern:-MTWRFSU}
+  echo "Enter time in HH:MM:SS (24 hour format)"
+  read time
+  mypassword=$(read_password)
+  echo $mypassword | sudo -S pmset repeat $action $pattern $time
+}
+
+remove() {
+  mypassword=$(read_password)
+  echo $mypassword | sudo -S pmset repeat cancel
+}
+
+print_usage() {
+  echo "\nUsage: $BASECMD subcommand\n"
+  echo "Subcommand     Alias                        Help"
+  echo "list            ls              - lists the repeat schedule for power"
+  echo "schedule         s              - initiates a new schedule"
+  echo "remove           r              - removes the existing schedule"
+  echo ""
+  exit 1
+}
+
+validate() {
+  if [[ $NO_OF_ARGS -ne 1 ]]
+  then
+    print_usage
+    exit 1
+  fi
+}
+
+main() {
+  validate
+  case $MAIN_COMMAND in
+    list|ls)      list
+                  ;;
+    schedule|s)   schedule
+                  ;;
+    remove|r)     remove
+                  ;;
+    *)            print_usage
+  esac
+}
+
+main

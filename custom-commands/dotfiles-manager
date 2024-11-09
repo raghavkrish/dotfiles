@@ -1,0 +1,53 @@
+#!/usr/bin/env zsh
+set -e
+
+BASECMD=`basename $0`
+
+NO_OF_ARGS=$#
+MAIN_COMMAND=$1
+
+REPO_PATH="${HOME}/code/dev-setup/dotfiles/"
+SYSTEM_PATH="${HOME}/dotfiles/"
+
+validate_dir(){
+  if [[ ! -d "$1" ]]; then
+  echo "Error: Directory '$1' does not exist"
+  exit 1
+fi
+}
+
+validate_args() {
+  if [[ $NO_OF_ARGS -ne 1 ]]
+  then
+    print_usage
+    exit 1
+  fi
+}
+
+run_copy() {
+  rsync -av --progress --exclude '.git' "$1" "$2"
+}
+
+print_usage(){
+  echo "\nUsage: $BASECMD subcommand\n"
+  echo "Subcommand     Alias                        Help"
+  echo "str              s              - Copy files from SYSTEM_PATH to REPO_PATH"
+  echo "rts              r              - Copy files from REPO_PATH to SYSTEM_PATH"
+  echo ""
+  exit 1
+}
+
+main() {
+  case $MAIN_COMMAND in
+    str|s)        run_copy $SYSTEM_PATH $REPO_PATH
+                  ;;
+    rts|r)        run_copy $REPO_PATH $SYSTEM_PATH
+                  ;;
+    *)            print_usage
+  esac
+}
+
+validate_args
+validate_dir $REPO_PATH
+validate_dir $SYSTEM_PATH
+main

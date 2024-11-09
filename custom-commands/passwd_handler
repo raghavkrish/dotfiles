@@ -1,0 +1,5 @@
+PASSWORD_FILE_PATH='/Users/raghav/misc/custom-commands/.password'
+read_password() {
+  content=$(head -n 1 $PASSWORD_FILE_PATH)
+  echo $content
+}
