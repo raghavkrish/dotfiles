@@ -1,0 +1,84 @@
+# Application Launchers
+cmd - return : open -n -a "Terminal"
+cmd + shift - return : open -n -a "Safari"
+cmd + alt - return : open -n -a "Finder"
+
+# Common Applications
+cmd + shift - b : open -n -a "Safari"  # Browser
+cmd + shift - s : open -n -a "Slack"    # Slack
+cmd + shift - n : open -n -a "Notes"    # Notes
+cmd + shift - w : open -n -a "WezTerm"
+
+# System Controls
+# Volume Controls
+alt + shift - up : osascript -e 'set volume output volume ((output volume of (get volume settings)) + 5)'
+alt + shift - down : osascript -e 'set volume output volume ((output volume of (get volume settings)) - 5)'
+alt + shift - m : osascript -e 'set volume output muted not (output muted of (get volume settings))'
+
+# Brightness Controls (requires brightness cli tool)
+alt + shift - right : brightness -i 10
+alt + shift - left : brightness -d 10
+
+# Screenshot Controls
+cmd + shift - 3 : screencapture -i ~/Screenshots/$(date +%Y-%m-%d_%H%M%S).png
+cmd + shift - 4 : screencapture -i -c
+
+# Application Management
+# Quit Active Application
+cmd + alt - q : osascript -e 'tell application (path to frontmost application as text) to quit'
+
+# Hide Active Application
+cmd + alt - h : osascript -e 'tell application (path to frontmost application as text) to set visible to false'
+
+# Window Management using native macOS commands
+# Maximize Window
+cmd + alt - f : osascript -e 'tell application "System Events" to tell (first process whose frontmost is true) to set value of attribute "AXFullScreen" of first window to true'
+
+# Center Window
+cmd + alt - c : osascript -e '
+    tell application "System Events"
+        tell (first process whose frontmost is true)
+            tell window 1
+                set {x, y} to position
+                set {w, h} to size
+                set screenSize to get size of first window of (first application process whose frontmost is true)
+                set screenWidth to item 1 of screenSize
+                set screenHeight to item 2 of screenSize
+                set position to {(screenWidth - w) / 2, (screenHeight - h) / 2}
+            end tell
+        end tell
+    end tell'
+
+# Left Half
+cmd + alt - left : osascript -e '
+    tell application "System Events"
+        tell (first process whose frontmost is true)
+            tell window 1
+                set size to {screenWidth/2, screenHeight}
+                set position to {0, 0}
+            end tell
+        end tell
+    end tell'
+
+# Right Half
+cmd + alt - right : osascript -e '
+    tell application "System Events"
+        tell (first process whose frontmost is true)
+            tell window 1
+                set size to {screenWidth/2, screenHeight}
+                set position to {screenWidth/2, 0}
+            end tell
+        end tell
+    end tell'
+
+# Spaces Navigation (requires SIP to be disabled)
+# Note: These might not work on all macOS versions due to security restrictions
+ctrl - 1 : osascript -e 'tell application "System Events" to key code 18 using control down'
+ctrl - 2 : osascript -e 'tell application "System Events" to key code 19 using control down'
+ctrl - 3 : osascript -e 'tell application "System Events" to key code 20 using control down'
+ctrl - 4 : osascript -e 'tell application "System Events" to key code 21 using control down'
+
+# System Commands
+ctrl + alt + cmd - r : osascript -e 'tell application "System Events" to restart'
+ctrl + alt + cmd - s : osascript -e 'tell application "System Events" to sleep'
+ctrl + alt + cmd - l : osascript -e 'tell application "System Events" to keystroke "q" using {command down, control down}'

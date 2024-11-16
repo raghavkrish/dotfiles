@@ -81,7 +81,9 @@ zstyle ':omz:plugins:eza' 'icons' yes
 zstyle ':omz:plugins:eza' 'dirs-first' yes
 zstyle ':omz:plugins:eza' 'header' yes
 zstyle ':omz:plugins:eza' 'git-status' no
-source .dracula-zsh-syntax
+if [ -f "$HOME/.dracula-zsh-syntax" ]; then
+  source "$HOME/.dracula-zsh-syntax"
+fi
 plugins=(git httpie jsontools macos zsh-autosuggestions zsh-syntax-highlighting sublime you-should-use chucknorris sudo)
 
 # Load brew completions
