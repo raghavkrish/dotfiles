@@ -1,0 +1,5 @@
+**/*.DS_Store
+custom-commands/Icon
+custom-commands/.password
+dotfiles/atuin
+dotfiles/thefuck
