@@ -206,6 +206,9 @@ alias zshconfig='vi ~/dotfiles/zsh/.zshrc'
 alias free='btop'
 alias y='yazi'
 
+# GCloud aliases
+alias gapisix="gcloud compute ssh apisix-demo --zone=us-west1-b --project=devops-414505"
+
 # zellij aliases
 alias z="zellij"
 alias zc="zellij --layout compact"
@@ -219,19 +222,54 @@ alias zda="zellij da"
 alias zrf="zellij run --floating -- "
 alias zrb="zellij run -c -- "
 
-# Docker aliases
-alias di="docker images"
-alias dia='docker images -a'
-alias dca="docker ps -a -q"
-alias dcr='docker ps'
-alias drc='docker rm'
-alias dri='docker rmi'
-alias drac="docker rm $(docker ps -a -q)"
-alias drai="docker rmi $(docker images -a -q)"
-alias dstop="docker stop"
-alias dstart='docker start'
-alias dbl='docker build'
-alias dsp='docker system prune'
+# Docker functions - so that they are not evaled at startup
+di() {
+  docker images
+}
+
+dia() {
+  docker images -a
+}
+
+dca() {
+  docker ps -a -q
+}
+
+dcr() {
+  docker ps
+}
+
+drc() {
+  docker rm "$@"
+}
+
+dri() {
+  docker rmi "$@"
+}
+
+drac() {
+  docker rm $(docker ps -a -q)
+}
+
+drai() {
+  docker rmi $(docker images -a -q)
+}
+
+dstop() {
+  docker stop "$@"
+}
+
+dstart() {
+  docker start "$@"
+}
+
+dbl() {
+  docker build "$@"
+}
+
+dsp() {
+  docker system prune
+}
 
 dssh() {
   docker exec -it $1 /bin/bash
