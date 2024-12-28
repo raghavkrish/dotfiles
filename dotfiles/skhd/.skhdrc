@@ -7,5 +7,6 @@ cmd + alt - m : open -a "Spotify"
 cmd + alt - d : open -a "Docker"
 cmd + alt - f : open -a "Finder"
 cmd + alt - o : open -a "Obsidian"
+cmd + alt - g : open -a "Ghostty"
 cmd + alt - l : ${HOME}/code/work/webtiga/run_apps.sh
 cmd + alt - x : ${HOME}/code/work/webtiga/quit_apps.sh

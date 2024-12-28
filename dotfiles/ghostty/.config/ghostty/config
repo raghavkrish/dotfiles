@@ -1,0 +1,29 @@
+# Font
+font-size = 15
+font-family = JetBrainsMono Nerd Font
+
+# Appearance
+theme = dracula
+background = 000000
+background-opacity = 0.7
+# background-blur-radius = 1
+
+
+# Window
+macos-titlebar-style = hidden
+confirm-close-surface = false
+quit-after-last-window-closed = true
+macos-titlebar-proxy-icon = hidden
+window-colorspace = display-p3
+window-decoration = false
+window-padding-x = 5
+window-padding-y = 10
+macos-window-shadow = false
+quick-terminal-position = center
+
+# Keymaps
+keybind = super+shift+r=reload_config
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false

@@ -81,9 +81,9 @@ zstyle ':omz:plugins:eza' 'icons' yes
 zstyle ':omz:plugins:eza' 'dirs-first' yes
 zstyle ':omz:plugins:eza' 'header' yes
 zstyle ':omz:plugins:eza' 'git-status' no
-if [ -f "$HOME/.dracula-zsh-syntax" ]; then
-  source "$HOME/.dracula-zsh-syntax"
-fi
+# if [ -f "$HOME/.dracula-zsh-syntax" ]; then
+#   source "$HOME/.dracula-zsh-syntax"
+# fi
 plugins=(git httpie jsontools macos zsh-autosuggestions zsh-syntax-highlighting sublime you-should-use chucknorris sudo)
 
 # Load brew completions
@@ -134,10 +134,10 @@ source $ZSH/oh-my-zsh.sh
 export FD_EXCLUDE_DIRS="(.git|node_modules)"
 EZA_DEFAULT_OPTIONS="--color=always --icons=always"
 
-# Load eza Dracula theme
-if [ -f "$HOME/.config/eza/dracula.sh" ]; then
-    source "$HOME/.config/eza/dracula.sh"
-fi
+#Load eza Dracula theme
+# if [ -f "$HOME/.config/eza/dracula.sh" ]; then
+#     source "$HOME/.config/eza/dracula.sh"
+# fi
 
 # eza aliases
 alias ls="eza ${EZA_DEFAULT_OPTIONS}"
@@ -204,7 +204,6 @@ alias stow-manager='/Users/raghav/misc/custom-commands/stow-manager'
 alias zshconf='subl ~/dotfiles/zsh/.zshrc'
 alias zshconfig='vi ~/dotfiles/zsh/.zshrc'
 alias free='btop'
-alias y='yazi'
 
 # GCloud aliases
 alias gapisix="gcloud compute ssh apisix-demo --zone=us-west1-b --project=devops-414505"
@@ -295,6 +294,15 @@ copy() {
   cat $1 | pbcopy
 }
 
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
 # load nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -310,6 +318,9 @@ eval "$(atuin init zsh)"
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 . ~/.asdf/plugins/golang/set-env.zsh
 
+export PATH="/Users/raghav/.local/share/solana/install/active_release/bin:$PATH"
+
 # export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 # source <(carapace _carapace)
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"

@@ -19,4 +19,5 @@ return {
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.utility.hover-nvim" },
   { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.editing-support.comment-box-nvim" },
 }
