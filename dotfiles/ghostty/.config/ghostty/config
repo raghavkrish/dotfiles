@@ -16,14 +16,16 @@ quit-after-last-window-closed = true
 macos-titlebar-proxy-icon = hidden
 window-colorspace = display-p3
 window-decoration = false
-window-padding-x = 5
+window-padding-x = 10
 window-padding-y = 10
 macos-window-shadow = false
 quick-terminal-position = center
 
 # Keymaps
 keybind = super+shift+r=reload_config
+keybind = super+shift+t=toggle_quick_terminal
+keybind = super+shift+e=equalize_splits
 
-# Cursor
+# Cursor - Not Working for now
 cursor-style = block
 cursor-style-blink = false
